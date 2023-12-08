@@ -3,9 +3,11 @@ defmodule BlogWeb.StoryLive.Index do
 
   alias Blog.Stories
   alias Blog.Stories.Story
+  require Logger
 
   @impl true
   def mount(_params, _session, socket) do
+    Logger.info(current_user_is: socket.assigns[:current_user].id)
     {:ok, stream(socket, :stories, Stories.list_stories())}
   end
 

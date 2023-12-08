@@ -2,6 +2,7 @@ defmodule BlogWeb.StoryLive.FormComponent do
   use BlogWeb, :live_component
 
   alias Blog.Stories
+  require Logger
 
   @impl true
   def render(assigns) do
@@ -20,7 +21,7 @@ defmodule BlogWeb.StoryLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:title]} type="text" label="Title" />
-        <.input field={@form[:body]} type="text" label="Body" />
+        <.input field={@form[:body]} type="textarea" label="Body" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Story</.button>
         </:actions>
@@ -49,7 +50,16 @@ defmodule BlogWeb.StoryLive.FormComponent do
     {:noreply, assign_form(socket, changeset)}
   end
 
-  def handle_event("save", %{"story" => story_params}, socket) do
+  def handle_event(
+    "save",
+    %{"story" => story_params},
+    %{assigns: %{user_id: user_id}} = socket
+    ) do
+    # Logger.info(current_user_from_form_component_attempt2: user_id)
+
+    story_params = Map.put(story_params, "user_id", user_id)
+    Logger.info(story_params_after_addint_user_id: story_params)
+
     save_story(socket, socket.assigns.action, story_params)
   end
 
