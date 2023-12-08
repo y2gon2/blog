@@ -1,0 +1,17 @@
+<.header>
+  HOME - All Users Stories
+</.header>
+
+<.table
+  id="stories"
+  rows={@streams.stories}
+  row_click={fn {_id, story} -> JS.navigate(~p"/stories/#{story}") end}
+>
+  <:col :let={{_id, story}} label="Title"><%= story.title %></:col>
+  <:col :let={{_id, story}} label="Body"><%= story.body %></:col>
+
+  <:action :let={{id, story}}>
+    <.link navigate={~p"/stories/#{story}"}>Read</.link>
+  </:action>
+</.table>
+
