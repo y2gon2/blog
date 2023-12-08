@@ -8,7 +8,7 @@ defmodule BlogWeb.StoryLive.Index do
   @impl true
   def mount(_params, _session, socket) do
     Logger.info(current_user_is: socket.assigns[:current_user].id)
-    {:ok, stream(socket, :stories, Stories.list_stories())}
+    {:ok, stream(socket, :stories, Stories.list_stories(socket.assigns[:current_user].id))}
   end
 
   @impl true
@@ -19,7 +19,7 @@ defmodule BlogWeb.StoryLive.Index do
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
     |> assign(:page_title, "Edit Story")
-    |> assign(:story, Stories.get_story!(id))
+    |> assign(:story, Stories.get_story!(id, socket.assigns.current_user.id))
   end
 
   defp apply_action(socket, :new, _params) do
@@ -41,7 +41,7 @@ defmodule BlogWeb.StoryLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    story = Stories.get_story!(id)
+    story = Stories.get_story!(id, socket.assigns.current_user.id)
     {:ok, _} = Stories.delete_story(story)
 
     {:noreply, stream_delete(socket, :stories, story)}

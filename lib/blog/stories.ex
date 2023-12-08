@@ -21,6 +21,13 @@ defmodule Blog.Stories do
     Repo.all(Story)
   end
 
+  def list_stories(user_id) do
+    Repo.all(from s in Story, where: s.user_id == ^user_id)
+    # `from s in Story, where: s.user_id == ^user_id` Ecto query 구문
+    # 가져온 각각의 Story data 를 "s" 로 지칭.
+    # 해당 data 에 user_id column 값이 매개변수로 받은 값과 일치하는 record 들만 반환
+  end
+
   @doc """
   Gets a single story.
 
@@ -36,6 +43,10 @@ defmodule Blog.Stories do
 
   """
   def get_story!(id), do: Repo.get!(Story, id)
+
+  def get_story!(id, user_id) do
+    Repo.one(from s in Story, where: s.id == ^id and s.user_id == ^user_id)
+  end
 
   @doc """
   Creates a story.
