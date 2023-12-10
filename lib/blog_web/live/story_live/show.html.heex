@@ -9,4 +9,7 @@
   <:item title="Name"><%= @story.user.name %></:item>
 </.list>
 
+<%!-- 외부 render module 을 가져오는 방법 --%>
+<BlogWeb.CommentLive.Test.render/> 
+
 <.back navigate={~p"/"}>Back to Home</.back>
