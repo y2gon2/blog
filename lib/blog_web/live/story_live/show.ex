@@ -2,10 +2,11 @@ defmodule BlogWeb.StoryLive.Show do
   use BlogWeb, :live_view
 
   alias Blog.Stories
+  alias Blog.Comments.Comment
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    {:ok, assign(socket, comment: %Comment{})}
   end
 
   @impl true

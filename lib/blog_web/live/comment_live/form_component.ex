@@ -19,7 +19,7 @@ defmodule BlogWeb.CommentLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-
+      <.input field={@form[:message]} type="text" label="Message" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Comment</.button>
         </:actions>
