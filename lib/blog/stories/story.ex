@@ -1,11 +1,13 @@
 defmodule Blog.Stories.Story do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Blog.Comments.Comment
 
   schema "stories" do
     field :body, :string
     field :title, :string
     belongs_to :user, Blog.Accounts.User
+    has_many :comments, Comment, on_delete: :delete_all
 
     timestamps()
   end
