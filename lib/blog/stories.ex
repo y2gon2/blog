@@ -18,7 +18,7 @@ defmodule Blog.Stories do
 
   """
   def list_stories do
-    Repo.all(Story) |> Repo.preload(:user)
+    Repo.all(Story) |> Repo.preload([:user, :comments]) # test 에서 :comment 추가 preload 조건 확인됨
   end
 
   def list_stories(user_id) do

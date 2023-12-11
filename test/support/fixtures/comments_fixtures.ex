@@ -18,17 +18,17 @@ defmodule Blog.CommentsFixtures do
     comment
   end
 
-  @doc """
-  Generate a comment.
-  """
-  def comment_fixture(attrs \\ %{}) do
-    {:ok, comment} =
-      attrs
-      |> Enum.into(%{
-        message: "some message"
-      })
-      |> Blog.Comments.create_comment()
+  # @doc """
+  # Generate a comment.
+  # """
+  # def comment_fixture(attrs \\ %{}) do
+  #   {:ok, comment} =
+  #     attrs
+  #     |> Enum.into(%{
+  #       message: "some message"
+  #     })
+  #     |> Blog.Comments.create_comment()
 
-    comment
-  end
+  #   comment
+  # end
 end

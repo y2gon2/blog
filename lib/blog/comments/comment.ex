@@ -14,8 +14,8 @@ defmodule Blog.Comments.Comment do
   def changeset(comment, attrs) do
     comment
     |> cast(attrs, [:message, :story_id, :user_id])
-    |> validate_required([:message, :story_id]) # 만약 회원들만 comment 남기는 것을 허용하고자할 경우 :user_id 를 추가하는 것이 안전함.
-
+    |> validate_required([]) # 만약 회원들만 comment 남기는 것을 허용하고자할 경우 :user_id 를 추가하는 것이 안전함.
+                                    # test 조건에서 :message, :story_id 가 없는 상태일 때 comment 추가 가능하도록 해당 atom 삭제?
     # case
     # 1st argument: comment - 해당 schema 함수를 통해 생성된 구조체. 해당 구조체에 data 를 담아 영속성 처리를 한다.
     # 2nd argument: attrs - logic 작업으로 전달 받은 data.

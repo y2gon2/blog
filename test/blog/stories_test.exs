@@ -14,10 +14,60 @@ defmodule Blog.StoriesTest do
       story = story_fixture()
       assert Stories.list_stories() == [story]
     end
+#     left:  [
+#       %Blog.Stories.Story{
+#         __meta__: #Ecto.Schema.Metadata<:loaded, "stories">,
+#         id: 235,
+#         body: "some body",
+#         title: "some title",
+#         user_id: nil,
+#         user: nil,
+#         comments: #Ecto.Association.NotLoaded<association :comments is not loaded>, =>  preload 설정에 comment 값도 추가해주어야?
+#         inserted_at: ~N[2023-12-11 05:54:51],
+#         updated_at: ~N[2023-12-11 05:54:51]
+#       }
+#     ]
+# right: [
+#       %Blog.Stories.Story{
+#         __meta__: #Ecto.Schema.Metadata<:loaded, "stories">,
+#         id: 235,
+#         body: "some body",
+#         title: "some title",
+#         user_id: nil,
+#         user: nil,
+#         comments: [],
+#         inserted_at: ~N[2023-12-11 05:54:51],
+#         updated_at: ~N[2023-12-11 05:54:51]
+#       }
+#     ]
 
     test "get_story!/1 returns the story with given id" do
       story = story_fixture()
       assert Stories.get_story!(story.id) == story
+
+      # left:  %Blog.Stories.Story{
+      #   __meta__: #Ecto.Schema.Metadata<:loaded, "stories">,
+      #   id: 169,
+      #   body: "some body",
+      #   title: "some title",
+      #   user_id: nil,
+      #   user: nil,
+      #   comments: [],
+      #   inserted_at: ~N[2023-12-11 05:23:24],
+      #   updated_at: ~N[2023-12-11 05:23:24]
+      #   }
+
+      # right: %Blog.Stories.Story{
+      #   __meta__: #Ecto.Schema.Metadata<:loaded, "stories">,
+      #   id: 169,
+      #   body: "some body",
+      #   title: "some title",
+      #   user_id: nil,
+      #   user: #Ecto.Association.NotLoaded<association :user is not loaded>,  => preload 가 test 에서 정상적으로 구현되지 않은 상태이기 때문에 에러 발생
+      #   comments: #Ecto.Association.NotLoaded<association :comments is not loaded>,  => preload 가 test 에서 정상적으로 구현되지 않은 상태이기 때문에 에러 발생
+      #   inserted_at: ~N[2023-12-11 05:23:24],
+      #   updated_at: ~N[2023-12-11 05:23:24]
+      # }
     end
 
     test "create_story/1 with valid data creates a story" do
