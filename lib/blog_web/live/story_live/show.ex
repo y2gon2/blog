@@ -6,7 +6,12 @@ defmodule BlogWeb.StoryLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, comment: %Comment{})}
+    current_user_id = if socket.assigns[:current_user] do
+      socket.assigns[:current_user].id
+    else
+      nil
+    end
+    {:ok, assign(socket, comment: %Comment{}, current_user_id: current_user_id)}
   end
 
   @impl true
