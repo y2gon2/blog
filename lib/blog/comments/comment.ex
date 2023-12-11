@@ -5,6 +5,7 @@ defmodule Blog.Comments.Comment do
   schema "comments" do
     field :message, :string
     belongs_to :story, Blog.Stories.Story
+    belongs_to :user, Blog.Accounts.User
 
     timestamps()
   end
@@ -12,7 +13,7 @@ defmodule Blog.Comments.Comment do
   @doc false
   def changeset(comment, attrs) do
     comment
-    |> cast(attrs, [:message, :story_id])
-    |> validate_required([:message, :story_id])
+    |> cast(attrs, [:message, :story_id, :user_id])
+    |> validate_required([:message, :story_id, :user_id])
   end
 end

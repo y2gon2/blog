@@ -42,7 +42,7 @@ defmodule Blog.Stories do
       ** (Ecto.NoResultsError)
 
   """
-  def get_story!(id), do: Repo.get!(Story, id) |> Repo.preload(:user)
+  def get_story!(id), do: Repo.get!(Story, id) |> Repo.preload([:user, :comments]) # sthory.ex 에 해당 association 설정으로 바로 사용 가능. has_many :comments, Comment, on_delete: :delete_all
 
   def get_story!(id, user_id) do
     Repo.one(from s in Story, where: s.id == ^id and s.user_id == ^user_id)
