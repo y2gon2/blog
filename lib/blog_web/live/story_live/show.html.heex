@@ -1,31 +1,29 @@
-<.header>
-  Story <%= @story.id %>
-  <:subtitle>This is a story from a user on our websited.</:subtitle>
-</.header>
-
-<.list>
-  <:item title="Title"><%= @story.title %></:item>
-  <:item title="Body"><%= @story.body %></:item>
-  <:item title="Name"><%= @story.user.name %></:item>
-</.list>
-
-<%!-- 외부 render module 을 가져오는 방법 --%>
-<%!-- <BlogWeb.CommentLive.Test.render/>  --%>
-<div class="mt-20">
-
-<%!-- 만약 회원이 아닌 사용자가 comment 를 남기는 것을 막고자 하는 경우 --%>
-<%!-- <%= if @current_user_id do %> --%> 
-  <.live_component
-    module={BlogWeb.CommentLive.FormComponent}
-    id={:new}
-    title={@page_title}
-    action={:new}
-    comment={@comment}
-    story_id={@story.id}
-    current_user_id={@current_user_id}
-    patch={~p"/stories/#{@story.id}"}
-  />
-<%!-- <% end %> --%>
+<div class="bg-white py-2 px-2 lg:px-8">
+  <div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+    <.back navigate={~p"/"}>Back to stories</.back>
+    <p class="mt-10 text-base font-semibold leading-7 text-indigo-600">written by <%= @story.user.name %></p>
+    <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"><%= @story.title %></h1>
+    <p class="mt-6 text-xl leading-8"><%= @story.body %></p>
+  
+    <%!-- 외부 render module 을 가져오는 방법 --%>
+    <%!-- <BlogWeb.CommentLive.Test.render/>  --%>
+    <div class="mt-20">
+    <%!-- 만약 회원이 아닌 사용자가 comment 를 남기는 것을 막고자 하는 경우 --%>
+    <%!-- <%= if @current_user_id do %> --%> 
+      <.live_component
+        module={BlogWeb.CommentLive.FormComponent}
+        id={:new}
+        title={@page_title}
+        action={:new}
+        comment={@comment}
+        story_id={@story.id}
+        current_user_id={@current_user_id}
+        patch={~p"/stories/#{@story.id}"}
+      />
+    <%!-- <% end %> --%>
+</div>
+  
+  </div>
 </div>
 
 <.list>
@@ -36,4 +34,3 @@
   </:item>
 </.list>
 
-<.back navigate={~p"/"}>Back to Home</.back>

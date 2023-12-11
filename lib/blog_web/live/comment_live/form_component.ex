@@ -7,11 +7,6 @@ defmodule BlogWeb.CommentLive.FormComponent do
   def render(assigns) do
     ~H"""
     <div>
-      <.header>
-        <%= @title %>
-        <:subtitle>Use this form to manage comment records in your database.</:subtitle>
-      </.header>
-
       <.simple_form
         for={@form}
         id="comment-form"
@@ -21,7 +16,7 @@ defmodule BlogWeb.CommentLive.FormComponent do
       >
       <.input field={@form[:story_id]} type="hidden" value={@story_id}/>
       <.input field={@form[:user_id]} type="hidden" value={@current_user_id}/>
-      <.input field={@form[:message]} type="text" label="Message" />
+      <.input field={@form[:message]} type="text" label="Leave a Comment" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Comment</.button>
         </:actions>

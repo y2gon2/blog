@@ -52,7 +52,7 @@ defmodule BlogWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {BlogWeb.Layouts, :app}
+        layout: {BlogWeb.Layouts, :app} # app.html.heex 적용
 
       unquote(html_helpers())
     end
